@@ -1,12 +1,43 @@
-function Footer({ isInformationsPage }) {
-    const textColorClass = isInformationsPage ? "text-black" : "text-white";
-    
-    return (
-      <footer className={`flex space-x-4 fixed right-4 bottom-5 z-20 ${textColorClass}`}>
-        <p>Creative filmmaker & Creative Director</p>
-        <a href="">ln</a>
-      </footer>
-    )
+import { motion } from "framer-motion";
+
+const fadeInOutVariants = {
+  hidden: {
+    opacity: 0,
+    y: -30
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: "easeOut"
+    },
+    exit: {
+      opacity: 0,
+      y: -30,
+      transition: {
+        duration: 1,
+        ease: "easeIn"
+      }
+    },
   }
+};
+
+
+function Footer({ isInformationsPage, isImagesPage }) {
+  const textColorClass = isInformationsPage || isImagesPage ? "text-black" : "text-white";
   
-  export default Footer;
+  return (
+    <motion.footer className={`flex space-x-4 fixed right-4 bottom-5 z-20 ${textColorClass}`}
+      variants={fadeInOutVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <p>Creative filmmaker & Creative Director</p>
+      <a href="">ln</a>
+    </motion.footer>
+  )
+}
+
+export default Footer;

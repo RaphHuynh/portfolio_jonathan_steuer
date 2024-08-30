@@ -5,3 +5,21 @@
 ::-webkit-scrollbar {
     display: none;
   }
+
+  @font-face {
+    font-family: "satochi";
+    src: url(./assets/font/Zodiak_Complete/Fonts/OTF/Zodiak-Black.otf) format("opentype");
+  }
+  
+  @font-face {
+    font-family: "supreme";
+    src: url("./assets/font/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Regular.otf") format("opentype");
+  }
+  
+  p, a, li, span{
+    font-family: "supreme";
+  }
+  
+  h1, h2{
+    font-family: "satochi";
+  }

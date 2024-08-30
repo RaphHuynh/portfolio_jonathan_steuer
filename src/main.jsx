@@ -12,7 +12,33 @@ import {
 import * as ReactDOM from "react-dom/client";
 import Home from './pages/home.jsx';
 import Informations from './pages/informations.jsx';
-import Footer from './components/Footer.jsx';
+import Footer from './components/footer.jsx';
+import Images from './pages/images.jsx';
+import { motion } from "framer-motion";
+
+const fadeInOutVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      ease: "easeOut"
+    },
+    exit: {
+      opacity: 0,
+      y: 30,
+      transition: {
+        duration: 1,
+        ease: "easeIn"
+      }
+    },
+  }
+};
+
 
 const router = createBrowserRouter([
   {
@@ -26,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/informations",
         element: <Informations />
+      },
+      {
+        path: "/images",
+        element: <Images />
       }
     ]
   }
@@ -34,21 +64,29 @@ const router = createBrowserRouter([
 function Root() {
   const location = useLocation();
   const isInformationsPage = location.pathname === "/informations";
+  const isImagesPage = location.pathname === "/images";
+
+  const textColorClass = isImagesPage ? "text-black" : "text-white";
 
   return (
     <>
       {!isInformationsPage && (
-        <header className="fixed w-full bg-transparent z-10">
+        <motion.header className="fixed w-full bg-transparent z-10"
+          variants={fadeInOutVariants}
+          initial='hidden'
+          animate='visible'
+          exit='exit'
+        >
           <div className="flex m-4 w-full">
             <NavLink className='flex flex-col' to="/">
-              <h1 className='text-8xl text-white'>Jonathan</h1>
-              <h1 className='text-8xl text-white'>Steuer</h1>
+              <h1 className={`text-8xl ${textColorClass}`}>Jonathan</h1>
+              <h1 className={`text-8xl ${textColorClass}`}>Steuer</h1>
             </NavLink>
-            <nav className="text-xl space-x-4 right-4 top-5 fixed">
+            <nav className={`text-xl space-x-4 right-4 top-5 fixed ${textColorClass}`}>
               <NavLink
                 to="/staging"
                 className={({ isActive }) =>
-                  isActive ? "text-white/60" : "text-white"
+                  isActive ? `${textColorClass}/60` : textColorClass
                 }
               >
                 Staging
@@ -56,7 +94,7 @@ function Root() {
               <NavLink
                 to="/informations"
                 className={({ isActive }) =>
-                  isActive ? "text-white/60" : "text-white"
+                  isActive ? `${textColorClass}/60` : textColorClass
                 }
               >
                 Informations
@@ -64,23 +102,23 @@ function Root() {
               <NavLink
                 to="/images"
                 className={({ isActive }) =>
-                  isActive ? "text-white/60" : "text-white"
+                  isActive ? `${textColorClass}/60` : textColorClass
                 }
               >
                 Images
               </NavLink>
             </nav>
           </div>
-        </header>
+        </motion.header>
       )}
-      <body>
+      <div>
         <Outlet />
-      </body>
-      <Footer isInformationsPage={isInformationsPage} />
+      </div>
+      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} />
     </>
-  )
+  );
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router}/>
+  <RouterProvider router={router} />
 );

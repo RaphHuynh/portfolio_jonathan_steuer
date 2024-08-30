@@ -64,7 +64,7 @@ export default function Home() {
         if (!isHovering) {
           scrollContainer.scrollLeft += 1;
         }
-      }, 20);
+      }, 30);
     };
 
     startScrolling();
@@ -97,7 +97,7 @@ export default function Home() {
   return (
     <section
       className="w-full h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ backgroundColor, transition: 'background-color 0.5s ease' }}
+      style={{ backgroundColor, transition: 'background-color 2.5s ease' }}
     >
       {currentVideo && (
         <video
