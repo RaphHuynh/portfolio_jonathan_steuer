@@ -1,3 +1,4 @@
+import React from 'react';
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.jpg"
 import img4 from "../assets/img4.jpg";
@@ -16,13 +17,14 @@ function Images() {
     ];
 
     return (
-        <section className="w-full px-40 py-10">
-            <div className="grid grid-cols-4 gap-4 pt-36 items-center justify-center">
+        <section className="w-full px-4 md:px-40 py-10 h-screen flex items-center justify-center">
+            <div className="md:grid md:grid-cols-4 md:gap-4 items-center justify-center overflow-x-auto flex md:flex-wrap max-w-full">
                 {images.map((img, index) => (
-                    <div key={index} className="">
+                    <div key={index} className="flex-shrink-0 w-64 md:w-auto mx-2 md:mx-0 flex items-center justify-center">
                         <img 
                             src={img} 
-                            alt={`Image ${index + 1}`} 
+                            alt={`Image ${index + 1}`}
+                            className="w-full h-auto object-cover max-h-[80vh]" 
                         />
                     </div>
                 ))}

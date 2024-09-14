@@ -80,10 +80,10 @@ function Root() {
         >
           <div className="flex m-4 w-full">
             <NavLink className='flex flex-col' to="/">
-              <h1 className={`text-8xl ${textColorClass}`}>Jonathan</h1>
-              <h1 className={`text-8xl ${textColorClass}`}>Steuer</h1>
+              <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Jonathan</h1>
+              <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Steuer</h1>
             </NavLink>
-            <nav className={`text-xl space-x-4 right-4 top-5 fixed ${textColorClass}`}>
+            <nav className={`flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed ${textColorClass}`}>
               <NavLink
                 to="/staging"
                 className={({ isActive }) =>

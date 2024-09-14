@@ -6,9 +6,9 @@
     display: none;
   }
 
-  @font-face {
+ /** @font-face {
     font-family: "satochi";
-    src: url(./assets/font/Zodiak_Complete/Fonts/OTF/Zodiak-Black.otf) format("opentype");
+    src: url(./assets/font/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Bold.otf) format("opentype");
   }
   
   @font-face {
@@ -22,4 +22,4 @@
   
   h1, h2{
     font-family: "satochi";
-  }
+  }**/
