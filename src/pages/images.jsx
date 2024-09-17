@@ -19,7 +19,7 @@ function Images() {
         <section className="flex md:block w-full px-5 md:px-40 py-10 h-screen items-center justify-center">
             <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-40 items-center justify-center overflow-x-auto max-w-full">
                 {images.map((img, index) => (
-                    <div key={index} className=" translate-x-1/2 flex-shrink-0 w-64 md:w-auto mx-2 md:mx-0 flex items-center justify-center">
+                    <div key={index} className=" translate-x-1/2 md:translate-x-0 flex-shrink-0 w-64 md:w-auto mx-2 md:mx-0 flex items-center justify-center">
                         <img 
                             src={img} 
                             alt={`Image ${index + 1}`} 
