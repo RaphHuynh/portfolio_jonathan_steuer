@@ -9,7 +9,6 @@ import courreges from '../assets/video/courreges.mov';
 import zambi from '../assets/video/zambi.mov';
 import venice from '../assets/video/venice.mp4';
 
-
 export default function Home() {
   const films = [
     { name: "Venice Beach - Fucking Young", time: "1:31", color: "#FFCE7F", video: venice },
@@ -69,11 +68,21 @@ export default function Home() {
 
     startScrolling();
 
+    const handleWheel = (e) => {
+      if (!isHovering) {
+        e.preventDefault();
+        scrollContainer.scrollLeft += e.deltaY;
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
     return () => {
       if (scrollIntervalRef.current) {
         clearInterval(scrollIntervalRef.current);
       }
       scrollContainer.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleWheel);
     };
   }, [isHovering]);
 
@@ -96,7 +105,7 @@ export default function Home() {
 
   return (
     <section
-      className="fixed w-full h-screen flex items-center justify-center md:relative overflow-hidden"
+      className="fixed w-full h-screen flex items-center justify-center overflow-hidden"
       style={{ backgroundColor, transition: 'background-color 2.5s ease' }}
     >
       {currentVideo && (
@@ -113,7 +122,7 @@ export default function Home() {
       )}
       <div
         ref={scrollRef}
-        className="w-full overflow-x-scroll whitespace-nowrap z-10"
+        className="w-full overflow-x-scroll  whitespace-nowrap z-10"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         <div className="inline-block">
