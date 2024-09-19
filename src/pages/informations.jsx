@@ -26,7 +26,7 @@ const fadeInOutVariants = {
     return (
         <AnimatePresence>
             <motion.section 
-                className="md:grid md:grid-cols-2 h-screen w-full z-20 bg-[#DADADA] p-4"
+                className="fixed md:relative md:grid md:grid-cols-2 h-screen w-full z-20 bg-[#DADADA] p-4"
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -68,10 +68,10 @@ const fadeInOutVariants = {
                     </motion.aside>
                 </motion.article>
                 <motion.article 
-                    className="hidden w-full items-center h-full justify-center md:flex"
+                    className="hidden w-full items-center max-h-screen justify-center md:flex"
                     variants={fadeInOutVariants}
                 >
-                    <img src={photo} alt="Carmen" className="hidden md:block h-1/2 object-cover grayscale" />
+                    <img src={photo} alt="Carmen" className="hidden md:block h-1/3 w-1/3 object-cover grayscale" />
                 </motion.article>
                 <Link to="/" className="text-black fixed top-4 right-4 hover:text-black/60 font-semibold">
                     Close

@@ -96,7 +96,7 @@ export default function Home() {
 
   return (
     <section
-      className="w-full h-screen flex items-center justify-center relative overflow-hidden"
+      className="fixed w-full h-screen flex items-center justify-center md:relative overflow-hidden"
       style={{ backgroundColor, transition: 'background-color 2.5s ease' }}
     >
       {currentVideo && (
