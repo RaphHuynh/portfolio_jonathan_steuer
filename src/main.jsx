@@ -69,7 +69,7 @@ function Root() {
   const isImagesPage = location.pathname === "/images";
 
   const textColorClass = isImagesPage ? "text-black" : "text-white";
-  const headerZIndex = isHomePage ? 0 : 10; 
+  const headerZIndex = isHomePage ? -10 : 20;
 
   return (
     <>
@@ -135,7 +135,7 @@ function Root() {
           <Outlet />
         </div>
       </main>
-      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} isHome={headerZIndex} />
+      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} headerZIndex={headerZIndex} />
     </>
   );
 }

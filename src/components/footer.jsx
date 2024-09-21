@@ -28,7 +28,7 @@ function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
   const textColorClass = isInformationsPage || isImagesPage ? "text-black" : "text-white";
   
   return (
-    <footer className={`fixed flex space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass}`}
+    <footer className={`fixed flex space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass} `}
       variants={fadeInOutVariants}
       style={{ zIndex: headerZIndex }}
       initial="hidden"
@@ -38,7 +38,8 @@ function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
       <p>Creative filmmaker & Creative Director</p>
       <a href="" className="fixed md:relative right-4 md:right-auto">ln</a>
     </footer>
-  )
-} 
+  );
+}
+
 
 export default Footer;
