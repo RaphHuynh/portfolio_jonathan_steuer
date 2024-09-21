@@ -24,19 +24,20 @@ const fadeInOutVariants = {
 };
 
 
-function Footer({ isInformationsPage, isImagesPage }) {
+function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
   const textColorClass = isInformationsPage || isImagesPage ? "text-black" : "text-white";
   
   return (
-    <motion.footer className={`flex space-x-4 fixed left-4 md:left-auto md:right-4 bottom-5 z-20 ${textColorClass}`}
+    <footer className={`fixed flex space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass}`}
       variants={fadeInOutVariants}
+      style={{ zIndex: headerZIndex }}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
       <p>Creative filmmaker & Creative Director</p>
       <a href="" className="fixed md:relative right-4 md:right-auto">ln</a>
-    </motion.footer>
+    </footer>
   )
 } 
 

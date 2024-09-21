@@ -64,15 +64,19 @@ const router = createBrowserRouter([
 
 function Root() {
   const location = useLocation();
+  const isHomePage = location.pathname === "/";
   const isInformationsPage = location.pathname === "/informations";
   const isImagesPage = location.pathname === "/images";
 
   const textColorClass = isImagesPage ? "text-black" : "text-white";
+  const headerZIndex = isHomePage ? 0 : 10; 
 
   return (
     <>
       {!isInformationsPage && (
-        <motion.header className="fixed w-full bg-transparent z-10"
+        <motion.header 
+          className="fixed w-full bg-transparent" 
+          style={{ zIndex: headerZIndex }} 
           variants={fadeInOutVariants}
           initial='hidden'
           animate='visible'
@@ -104,32 +108,34 @@ function Root() {
           </div>
         </motion.header>
       )}
-      <div>
-        <AnimatedCursor
-        innerSize={8}
-        outerSize={8}
-        color='10, 10, 10'
-        outerAlpha={0.2}
-        innerScale={0.7}
-        outerScale={5}
-        clickables={[
-          'a',
-          'input[type="text"]',
-          'input[type="email"]',
-          'input[type="number"]',
-          'input[type="submit"]',
-          'input[type="image"]',
-          'label[for]',
-          'select',
-          'textarea',
-          'button',
-          '.link',
-          'span'
-        ]}
-      />
-        <Outlet />
-      </div>
-      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} />
+      <main>
+        <div>
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={8}
+            color='10, 10, 10'
+            outerAlpha={0.2}
+            innerScale={0.7}
+            outerScale={5}
+            clickables={[
+              'a',
+              'input[type="text"]',
+              'input[type="email"]',
+              'input[type="number"]',
+              'input[type="submit"]',
+              'input[type="image"]',
+              'label[for]',
+              'select',
+              'textarea',
+              'button',
+              '.link',
+              'span'
+            ]}
+          />
+          <Outlet />
+        </div>
+      </main>
+      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} isHome={headerZIndex} />
     </>
   );
 }

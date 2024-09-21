@@ -33,25 +33,12 @@ const fadeInOutVariants = {
                 variants={fadeInOutVariants}
             >
                 <motion.article className="">
-                    <motion.aside className="w-full text-sm" variants={fadeInOutVariants}>
-                        <div className="md:flex mb-4">
-                            <motion.div className="mb-4 md:mb-auto mr-20 md:mr-40 md:w-2/5" variants={fadeInOutVariants}>
-                                <h2 className="text-slate-900 font-bold">USA</h2>
-                                <p className="text-[#8C8C8C]">ICONIC TALENT AGENCY</p>
-                                <p className="text-[#8C8C8C]">Heinrich Meyer - Heinrich@iconictalentagency.com</p>
-                                <p className="text-[#8C8C8C]">p/ 323-491-4102</p>
-                            </motion.div>
-                            <motion.div variants={fadeInOutVariants}>
-                                <h2 className="text-slate-900 font-bold">Scandinavia</h2>
-                                <p className="text-[#8C8C8C]">XO MGMT</p>
-                                <p className="text-[#8C8C8C]">info@xomgmt.se</p>
-                            </motion.div>
-                        </div>
+                    <motion.aside className="w-full" variants={fadeInOutVariants}>
                         <motion.div variants={fadeInOutVariants}>
-                            <h2 className="text-slate-900 font-bold">Europe</h2>
-                            <p className="text-[#8C8C8C]">LUX ARTISTS</p>
-                            <p className="text-[#8C8C8C]">Wladimir Baseden</p>
-                            <p className="text-[#8C8C8C]">Wladimir@luxartists.net</p>
+                            <h2 className="text-slate-900 font-bold">CONTACT</h2>
+                            <p className="text-[#8C8C8C]">steuer.jonathan@gmail.com</p>
+                            <p className="text-[#8C8C8C]">0695223535</p>
+                            <p className="text-[#8C8C8C]">@jonathan.steuer</p>
                         </motion.div>
                     </motion.aside>
                     <motion.aside 
