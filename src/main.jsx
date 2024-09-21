@@ -29,7 +29,7 @@ import img10 from "./assets/img10.jpg";
 import img11 from "./assets/img11.jpg";
 import arte from "./assets/video/arte.mov";
 import courreges from "./assets/video/courreges.mov";
-import les_oiseaux from "./assets/video/lesOiseaux.mp4";
+import les_oiseaux from "./assets/video/LesOiseaux.mp4";
 import manifeste_du_lin from "./assets/video/manifeste_du_lin.mp4";
 import pulse from "./assets/video/pulse.mp4";
 import red_bull from "./assets/video/redbull.mp4";
