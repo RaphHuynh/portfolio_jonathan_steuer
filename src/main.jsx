@@ -34,7 +34,7 @@ import manifeste_du_lin from "./assets/video/manifeste_du_lin.mp4";
 import pulse from "./assets/video/pulse.mp4";
 import red_bull from "./assets/video/redbull.mp4";
 import till_the_end from "./assets/video/till_the_end.mov";
-import venice from "./assets/video/venice_beach.mp4";
+import venice from "./assets/video/venice.mp4";
 import zambi from "./assets/video/zambi.mov";
 
 const fadeInOutVariants = {

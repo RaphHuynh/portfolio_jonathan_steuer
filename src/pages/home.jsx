@@ -8,7 +8,7 @@ import till_the_end from '../assets/video/till_the_end.mov';
 import les_oiseaux from '../assets/video/les_oiseaux.mp4';
 import courreges from '../assets/video/courreges.mov';
 import zambi from '../assets/video/zambi.mov';
-import venice from '../assets/video/venice_beach.mp4';
+import venice from '../assets/video/venice.mp4';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaInstagram } from "react-icons/fa";
