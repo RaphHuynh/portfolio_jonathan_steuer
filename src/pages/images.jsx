@@ -50,13 +50,13 @@ function Images() {
 
     return (
         <>
-            <section className="fixed md:relative flex md:block w-full px-5 md:px-40 py-10 h-screen items-center justify-center">
-                <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 items-center justify-center overflow-x-auto max-w-full">
+            <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center">
+                <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4">
                     {images.map((img, index) => (
                         <div
                             key={index}
                             onClick={() => openModal(index)}
-                            className="translate-x-1/2 md:translate-x-0 flex-shrink-0 w-64 md:w-auto mx-2 md:mx-0 flex items-center justify-center"
+                            className="flex-shrink-0 w-64 md:w-auto mx-auto mb-4"
                         >
                             <img
                                 src={img}

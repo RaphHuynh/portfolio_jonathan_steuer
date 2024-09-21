@@ -16,6 +16,7 @@ import Footer from './components/footer.jsx';
 import Images from './pages/images.jsx';
 import { motion } from "framer-motion";
 import AnimatedCursor from "react-animated-cursor"
+import { useState, useEffect } from 'react';
 
 const fadeInOutVariants = {
   hidden: {
@@ -40,6 +41,10 @@ const fadeInOutVariants = {
   }
 };
 
+// Fonction utilitaire pour détecter les appareils mobiles
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
 
 const router = createBrowserRouter([
   {
@@ -67,9 +72,22 @@ function Root() {
   const isHomePage = location.pathname === "/";
   const isInformationsPage = location.pathname === "/informations";
   const isImagesPage = location.pathname === "/images";
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const textColorClass = isImagesPage ? "text-black" : "text-white";
   const headerZIndex = isHomePage ? -10 : 20;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -110,28 +128,30 @@ function Root() {
       )}
       <main>
         <div>
-          <AnimatedCursor
-            innerSize={8}
-            outerSize={8}
-            color='10, 10, 10'
-            outerAlpha={0.2}
-            innerScale={0.7}
-            outerScale={5}
-            clickables={[
-              'a',
-              'input[type="text"]',
-              'input[type="email"]',
-              'input[type="number"]',
-              'input[type="submit"]',
-              'input[type="image"]',
-              'label[for]',
-              'select',
-              'textarea',
-              'button',
-              '.link',
-              'span'
-            ]}
-          />
+          {!isMobile && (
+            <AnimatedCursor
+              innerSize={8}
+              outerSize={8}
+              color='10, 10, 10'
+              outerAlpha={0.2}
+              innerScale={0.7}
+              outerScale={5}
+              clickables={[
+                'a',
+                'input[type="text"]',
+                'input[type="email"]',
+                'input[type="number"]',
+                'input[type="submit"]',
+                'input[type="image"]',
+                'label[for]',
+                'select',
+                'textarea',
+                'button',
+                '.link',
+                'span'
+              ]}
+            />
+          )}
           <Outlet />
         </div>
       </main>
