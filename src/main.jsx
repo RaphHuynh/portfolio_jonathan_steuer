@@ -95,24 +95,25 @@ async function preloadResources() {
 
 function LoadingPage({ progress }) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black">
+    <div className="flex flex-col items-center justify-center h-screen bg-white">
       <motion.div
-        className="text-white text-4xl mb-4"
+        className="text-black text-3xl mb-4 font-serif" 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
         Chargement...
       </motion.div>
-      <div className="w-64 h-2 bg-gray-200 rounded-full">
+      <div className="w-64 h-2 bg-gray-300 rounded-full shadow-md">
         <div 
-          className="h-full bg-white rounded-full transition-all duration-300 ease-out"
+          className="h-full bg-black rounded-full transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}
         ></div>
       </div>
     </div>
   );
 }
+
 
 function Root() {
   const location = useLocation();
@@ -156,7 +157,7 @@ function Root() {
         setIsLoading(false);
       } catch (error) {
         console.error("Error loading resources:", error);
-        setIsLoading(false); // Assurez-vous de désactiver l'écran de chargement même en cas d'erreur
+        setIsLoading(false);
       }
     };
 
