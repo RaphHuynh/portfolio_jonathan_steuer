@@ -150,7 +150,7 @@ export default function Home() {
       )}
       {!isPlaying && currentVideo && (
         <video
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
           src={currentVideo}
           loop
           muted

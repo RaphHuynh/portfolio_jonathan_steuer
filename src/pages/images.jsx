@@ -13,31 +13,38 @@ import img11 from "../assets/img11.jpg";
 function Images() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [isVisible, setIsVisible] = useState(false);  
+    const [isVisible, setIsVisible] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const images = [
         img1, img2, img4, img5, img6, img7, img8, img9, img10, img11
     ];
 
-    const openModal = (img) => {
-        setSelectedImage(img);
+    const openModal = (index) => {
+        setSelectedImage(images[index]);
+        setCurrentIndex(index); 
         setIsModalOpen(true);
     };
-
 
     const closeModal = () => {
         setIsVisible(false);
         setTimeout(() => {
             setIsModalOpen(false);
             setSelectedImage(null);
-        }, 300); 
+        }, 300);
+    };
+
+    const nextImage = () => {
+        const nextIndex = (currentIndex + 1) % images.length; 
+        setSelectedImage(images[nextIndex]);
+        setCurrentIndex(nextIndex);
     };
 
     useEffect(() => {
         if (isModalOpen) {
             setTimeout(() => {
                 setIsVisible(true);
-            }, 10); 
+            }, 10);
         }
     }, [isModalOpen]);
 
@@ -48,7 +55,7 @@ function Images() {
                     {images.map((img, index) => (
                         <div
                             key={index}
-                            onClick={() => openModal(img)}
+                            onClick={() => openModal(index)}
                             className="translate-x-1/2 md:translate-x-0 flex-shrink-0 w-64 md:w-auto mx-2 md:mx-0 flex items-center justify-center"
                         >
                             <img
@@ -64,7 +71,7 @@ function Images() {
             {/* Modal */}
             {isModalOpen && (
                 <div 
-                    className={`fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                    className={`fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                     onClick={closeModal}
                 >
                     <div className="relative" onClick={(e) => e.stopPropagation()}>
@@ -72,6 +79,7 @@ function Images() {
                             src={selectedImage}
                             alt="Selected"
                             className="h-96 md:h-[700px] object-cover transition-opacity duration-300"
+                            onClick={nextImage} 
                         />
                     </div>
                 </div>
