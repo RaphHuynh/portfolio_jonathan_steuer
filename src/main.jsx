@@ -29,12 +29,12 @@ import img10 from "./assets/img10.jpg";
 import img11 from "./assets/img11.jpg";
 import arte from "./assets/video/arte.mov";
 import courreges from "./assets/video/courreges.mov";
-import les_oiseaux from "./assets/video/LesOiseaux.mp4";
+import les_oiseaux from "./assets/video/les_oiseaux.mp4";
 import manifeste_du_lin from "./assets/video/manifeste_du_lin.mp4";
 import pulse from "./assets/video/pulse.mp4";
 import red_bull from "./assets/video/redbull.mp4";
 import till_the_end from "./assets/video/till_the_end.mov";
-import venice from "./assets/video/Venice_beach.mp4";
+import venice from "./assets/video/venice_beach.mp4";
 import zambi from "./assets/video/zambi.mov";
 
 const fadeInOutVariants = {
@@ -65,7 +65,7 @@ const imagesToPreload = [
 ];
 
 const videosToPreload = [
-  arte, courreges, les_oiseaux, pulse, red_bull, till_the_end, zambi
+  arte, courreges, les_oiseaux, pulse, red_bull, till_the_end, zambi, venice, manifeste_du_lin
 ];
 
 function preloadImage(src) {
