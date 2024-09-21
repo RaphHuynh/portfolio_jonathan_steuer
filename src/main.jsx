@@ -105,7 +105,7 @@ function Root() {
               <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Jonathan</h1>
               <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Steuer</h1>
             </NavLink>
-            <nav className={`flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed ${textColorClass}`}>
+            <nav className={`flex flex-col md:flex-row bottom-14 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed ${textColorClass}`}>
               <NavLink
                 to="/images"
                 className={({ isActive }) =>
