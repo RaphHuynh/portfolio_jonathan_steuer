@@ -11,26 +11,7 @@ import zambi from '../assets/video/zambi.mov';
 import venice from '../assets/video/venice.mp4';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const letterAnimation = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-    },
-  }),
-};
-
-const otherElementsAnimation = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { delay: 1.5, duration: 0.5 }
-  }
-};
+import { FaInstagram } from "react-icons/fa";
 
 export default function Home() {
   const films = [
@@ -42,7 +23,7 @@ export default function Home() {
     { name: "Wheels of freedom - Red Bull", time: "4:04", color: "#1E77EE", video: red_bull, link: "https://vimeo.com/647102047" },
     { name: "Courrèges - Subway", time: "0:52", color: "#6FB574", video: courreges, link: "https://vimeo.com/882834973/b5e58f3413" },
     { name: "Pulse - Trax Mag", time: "6:06", color: "#F76262", video: pulse, link: "https://vimeo.com/566808151" },
-    { name: "Arte - Illest Battle", time: "1:08", color: "#FF7F47", video: arte, link: "https://vimeo.com/551618195" },
+    { name: "Arte - Illest Battle", time: "1:08", color: "#FF7F47", video: arte, link: "https://vimeo.com/551618195" }
   ];
 
   const [backgroundColor, setBackgroundColor] = useState(films[0].color);
@@ -51,9 +32,6 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
   const scrollRef = useRef(null);
   const scrollIntervalRef = useRef(null);
-
-  const nameJonathan = "Jonathan".split('');
-  const nameSteuer = "Steuer".split('');
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
@@ -142,79 +120,19 @@ export default function Home() {
       <header className="fixed w-full bg-transparent h-screen">
         <div className="flex m-4 w-full">
           <NavLink className='flex flex-col' to="/">
-            <div className="flex">
-              {nameJonathan.map((letter, index) => (
-                <motion.h1
-                  key={index}
-                  className="text-6xl md:text-8xl text-white"
-                  custom={index}
-                  initial="hidden"
-                  animate="visible"
-                  variants={letterAnimation}
-                >
-                  {letter}
-                </motion.h1>
-              ))}
-            </div>
-            <div className="flex">
-              {nameSteuer.map((letter, index) => (
-                <motion.h1
-                  key={index}
-                  className="text-6xl md:text-8xl text-white"
-                  custom={index + nameJonathan.length}
-                  initial="hidden"
-                  animate="visible"
-                  variants={letterAnimation}
-                >
-                  {letter}
-                </motion.h1>
-              ))}
-            </div>
+            <h1 className="text-6xl md:text-8xl text-white">Jonathan</h1>
+            <h1 className="text-6xl md:text-8xl text-white">Steuer</h1>
           </NavLink>
-
-          {/* Other elements appear after the animation */}
-          <motion.nav
-            className="flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed text-white"
-            initial="hidden"
-            animate="visible"
-            variants={otherElementsAnimation}
-          >
+          <nav className="flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed text-white">
             <NavLink to="/images" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-white'}>
               Images
             </NavLink>
             <NavLink to="/informations" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-white'}>
               Informations
             </NavLink>
-          </motion.nav>
+          </nav>
         </div>
       </header>
-      
-      {/* The video and scrolling section */}
-      <motion.div
-        className="w-full overflow-x-scroll whitespace-nowrap z-10"
-        ref={scrollRef}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        initial="hidden"
-        animate="visible"
-        variants={otherElementsAnimation}
-      >
-        <div className="inline-block">
-          {[...films, ...films].map((film, index) => (
-            <span
-              key={index}
-              className="film-span inline-block px-10 text-white/50 text-xl capitalize hover:text-black/50 hover:cursor-pointer delay-150 transition"
-              data-color={film.color}
-              onMouseEnter={() => handleFilmHover(film.video)}
-              onMouseLeave={handleFilmLeave}
-              onClick={() => handleFilmClick(film)}
-            >
-              {film.name}
-            </span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Video player */}
       {isPlaying && currentVideo && (
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black z-50">
           <ReactPlayer
@@ -232,7 +150,6 @@ export default function Home() {
           </button>
         </div>
       )}
-
       {!isPlaying && currentVideo && (
         <video
           className="absolute top-0 left-0 w-full h-full object-cover -z-10"
@@ -244,12 +161,33 @@ export default function Home() {
           preload='auto'
         />
       )}
-
-      {/* Footer */}
-      <motion.footer className={`fixed flex space-x-4 left-4 md:left-auto md:right-4 bottom-5 text-white`} initial="hidden" animate="visible" variants={otherElementsAnimation}>
+      <div
+        ref={scrollRef}
+        className="w-full overflow-x-scroll whitespace-nowrap z-10"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <div className="inline-block">
+          {[...films, ...films].map((film, index) => (
+            <span
+              key={index}
+              className="film-span inline-block px-10 text-white/50 text-xl capitalize hover:text-black/50 hover:cursor-pointer delay-150 transition"
+              data-color={film.color}
+              onMouseEnter={() => handleFilmHover(film.video)}
+              onMouseLeave={handleFilmLeave}
+              onClick={() => handleFilmClick(film)}
+            >
+              <p>{film.name}</p> {film.time}
+            </span>
+          ))}
+        </div>
+      </div>
+      <footer className={`fixed flex space-x-4 items-center left-4 md:left-auto md:right-4 bottom-5 text-white`}
+      >
         <p>Creative filmmaker & Creative Director</p>
-        <a href="" className="fixed md:relative right-4 md:right-auto">ln</a>
-      </motion.footer>
+        <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer">
+          <FaInstagram />
+        </a>
+      </footer>
     </section>
   );
 }

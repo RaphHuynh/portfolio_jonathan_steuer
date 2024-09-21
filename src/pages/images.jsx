@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import img4 from "../assets/img4.jpg";
@@ -15,10 +16,45 @@ function Images() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isVisible, setIsVisible] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [visibleImages, setVisibleImages] = useState([]);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
 
     const images = [
         img1, img2, img4, img5, img6, img7, img8, img9, img10, img11
     ];
+
+    // Préchargement des images
+    useEffect(() => {
+        const imagePromises = images.map(src => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+        });
+
+        Promise.all(imagePromises)
+            .then(() => {
+                setImagesLoaded(true);
+            })
+            .catch(error => console.error("Error preloading images:", error));
+    }, []);
+
+    // Affichage progressif des images une fois chargées
+    useEffect(() => {
+        if (!imagesLoaded) return;
+
+        const interval = setInterval(() => {
+            if (visibleImages.length < images.length) {
+                setVisibleImages(prev => [...prev, images[prev.length]]);
+            } else {
+                clearInterval(interval);
+            }
+        }, 250); 
+
+        return () => clearInterval(interval);
+    }, [visibleImages, images, imagesLoaded]);
 
     const openModal = (index) => {
         setSelectedImage(images[index]);
@@ -48,27 +84,39 @@ function Images() {
         }
     }, [isModalOpen]);
 
+    const fadeInVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    };
+
+    if (!imagesLoaded) {
+        return <div className="flex justify-center items-center h-screen">Chargement des images...</div>;
+    }
+
     return (
-        <>
-            <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center">
-                <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4">
-                    {images.map((img, index) => (
-                        <div
+        <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center">
+            <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4">
+                <AnimatePresence>
+                    {visibleImages.map((img, index) => (
+                        <motion.div
                             key={index}
-                            onClick={() => openModal(index)}
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            variants={fadeInVariants}
                             className="flex-shrink-0 w-64 md:w-auto mx-auto mb-4"
+                            onClick={() => openModal(index)}
                         >
                             <img
                                 src={img}
                                 alt={`Image ${index + 1}`}
                                 className="w-full h-auto object-cover max-h-[50vh]"
                             />
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
-            </section>
+                </AnimatePresence>
+            </div>
 
-            {/* Modal */}
             {isModalOpen && (
                 <div 
                     className={`fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
@@ -84,7 +132,7 @@ function Images() {
                     </div>
                 </div>
             )}
-        </>
+        </section>
     );
 }
 

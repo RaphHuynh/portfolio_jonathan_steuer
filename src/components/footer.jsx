@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { FaInstagram } from "react-icons/fa";
 
 const fadeInOutVariants = {
   hidden: {
@@ -28,7 +29,7 @@ function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
   const textColorClass = isInformationsPage || isImagesPage ? "text-black" : "text-white";
   
   return (
-    <footer className={`fixed flex space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass} `}
+    <footer className={`fixed flex items-center space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass} `}
       variants={fadeInOutVariants}
       style={{ zIndex: headerZIndex }}
       initial="hidden"
@@ -36,7 +37,9 @@ function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
       exit="exit"
     >
       <p>Creative filmmaker & Creative Director</p>
-      <a href="" className="fixed md:relative right-4 md:right-auto">ln</a>
+      <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer">
+      <FaInstagram />
+      </a>
     </footer>
   );
 }
