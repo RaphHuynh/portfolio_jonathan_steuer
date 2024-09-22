@@ -123,6 +123,7 @@ function Root() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [hasTimedOut, setHasTimedOut] = useState(false);
 
   const textColorClass = isImagesPage ? "text-black" : "text-white";
   const headerZIndex = isHomePage ? -10 : 20;
@@ -153,24 +154,34 @@ function Root() {
         );
 
         await Promise.all([...imagePromises, ...videoPromises]);
-        
-        setIsLoading(false);
+        if (!hasTimedOut) {
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error("Error loading resources:", error);
         setIsLoading(false);
       }
     };
 
+    // Charger les ressources
     loadResources();
+
+    // Timeout de 5 secondes
+    const timeoutId = setTimeout(() => {
+      setHasTimedOut(true);
+      setIsLoading(false);
+    }, 5000); // Timeout après 5 secondes
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId); // Nettoyage du timeout
     };
-  }, []);
+  }, [hasTimedOut]);
 
   if (isLoading) {
     return <LoadingPage progress={loadingProgress} />;
   }
+
   return (
     <>
       <AnimatePresence>

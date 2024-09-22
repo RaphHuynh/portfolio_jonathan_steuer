@@ -10,7 +10,6 @@ import courreges from '../assets/video/courreges.mov';
 import zambi from '../assets/video/zambi.mov';
 import venice from '../assets/video/venice.mp4';
 import { NavLink } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { FaInstagram } from "react-icons/fa";
 
 export default function Home() {
