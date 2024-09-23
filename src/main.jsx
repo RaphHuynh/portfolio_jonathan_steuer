@@ -201,12 +201,12 @@ function Root() {
               </NavLink>
               <nav className={`flex flex-col md:flex-row bottom-14 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed ${textColorClass}`}>
                 <NavLink
-                  to="/images"
+                  to="/home"
                   className={({ isActive }) =>
                     isActive ? `${textColorClass}/60` : textColorClass
                   }
                 >
-                  Images
+                  Home
                 </NavLink>
                 <NavLink
                   to="/informations"
