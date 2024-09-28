@@ -6,20 +6,47 @@
     display: none;
   }
 
- /** @font-face {
-    font-family: "satochi";
-    src: url(./assets/font/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Bold.otf) format("opentype");
+  @font-face {
+    font-family: "suisseAntique";
+    src: url(./assets/font/suisseAntique.otf) format("opentype");
   }
   
   @font-face {
-    font-family: "supreme";
-    src: url("./assets/font/CabinetGrotesk_Complete/Fonts/OTF/CabinetGrotesk-Regular.otf") format("opentype");
+    font-family: "suisseLight";
+    src: url(./assets/font/suisseLight.otf) format("opentype");
   }
-  
-  p, a, li, span{
-    font-family: "supreme";
+
+  @font-face {
+    font-family: "suisseMedium";
+    src: url(./assets/font/suisseMedium.otf) format("opentype");
   }
-  
-  h1, h2{
-    font-family: "satochi";
-  }**/
+
+  @font-face {
+    font-family: "suisseBold";
+    src: url(./assets/font/suisseBold.otf) format("opentype");
+  }
+
+  @font-face {
+    font-family: "suisseBlack";
+    src: url(./assets/font/suisseBlack.otf) format("opentype");
+  }
+
+  .title-antique {
+    font-family: "suisseAntique";
+  }
+
+  .title-light {
+    font-family: "suisseLight";
+  }
+
+  .title-medium {
+    font-family: "suisseMedium";
+  }
+
+  .title-bold {
+    font-family: "suisseBold";
+  }
+
+  .title-black {
+    font-family: "suisseBlack";
+  }

@@ -27,6 +27,7 @@ export default function Home() {
 
   const [backgroundColor, setBackgroundColor] = useState(films[0].color);
   const [currentVideo, setCurrentVideo] = useState(null);
+  const [videoOpacity, setVideoOpacity] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const scrollRef = useRef(null);
@@ -66,7 +67,7 @@ export default function Home() {
         if (!isHovering && !isPlaying) {
           scrollContainer.scrollLeft += 1;
         }
-      }, 30);
+      }, 25);
     };
 
     startScrolling();
@@ -92,23 +93,27 @@ export default function Home() {
   const handleFilmHover = (video) => {
     setIsHovering(true);
     setCurrentVideo(video);
+    setTimeout(() => setVideoOpacity(1), 50);
   };
 
   const handleFilmLeave = () => {
     setIsHovering(false);
     if (!isPlaying) {
-      setCurrentVideo(null);
+      setVideoOpacity(0);
+      setTimeout(() => setCurrentVideo(null), 300);
     }
   };
 
   const handleFilmClick = (film) => {
     setCurrentVideo(film.link || film.video);
     setIsPlaying(true);
+    setVideoOpacity(1);
   };
 
   const handleCloseVideo = () => {
     setIsPlaying(false);
-    setCurrentVideo(null);
+    setVideoOpacity(0);
+    setTimeout(() => setCurrentVideo(null), 300);
   };
 
   return (
@@ -117,12 +122,12 @@ export default function Home() {
       style={{ backgroundColor, transition: 'background-color 2.5s ease' }}
     >
       <header className="fixed w-full bg-transparent h-screen">
-        <div className="flex m-4 w-full">
-          <NavLink className='flex flex-col' to="/">
+        <div className="flex w-full m-4">
+          <NavLink className='absolute flex flex-col title-medium md:top-[24px] md:left-[24px]' to="/">
             <h1 className="text-6xl md:text-8xl text-white">Jonathan</h1>
             <h1 className="text-6xl md:text-8xl text-white">Steuer</h1>
           </NavLink>
-          <nav className="flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:text-xl md:space-x-4 md:right-4 md:top-5 md:bottom-auto md:left-auto fixed text-white">
+          <nav className="flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:space-x-[16px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed text-white title-medium text-[13px]">
             <NavLink to="/images" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-white'}>
               Images
             </NavLink>
@@ -158,6 +163,10 @@ export default function Home() {
           autoPlay
           playsInline
           preload='auto'
+          style={{
+            opacity: videoOpacity,
+            transition: 'opacity 0.5s ease-in-out'
+          }}
         />
       )}
       <div
@@ -169,7 +178,7 @@ export default function Home() {
           {[...films, ...films].map((film, index) => (
             <span
               key={index}
-              className="film-span inline-block px-10 text-white/50 text-xl capitalize hover:text-black/50 hover:cursor-pointer delay-150 transition"
+              className="film-span inline-block px-[65px] text-white/50 text-xl capitalize hover:text-white hover:cursor-pointer delay-150 transition title-film"
               data-color={film.color}
               onMouseEnter={() => handleFilmHover(film.video)}
               onMouseLeave={handleFilmLeave}
@@ -180,7 +189,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <footer className={`fixed flex space-x-4 items-center left-4 md:left-auto md:right-4 bottom-5 text-white`}
+      <footer className={`fixed flex space-x-[16px] items-center left-4 md:left-auto right-4 bottom-5 text-white text-[13px] title-medium md:bottom-[40px] md:right-[48px]`}
       >
         <p>Creative filmmaker & Creative Director</p>
         <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer">

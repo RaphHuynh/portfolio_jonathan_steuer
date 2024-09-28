@@ -119,7 +119,7 @@ function Images() {
 
             {isModalOpen && (
                 <div 
-                    className={`fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                    className={`fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                     onClick={closeModal}
                 >
                     <div className="relative" onClick={(e) => e.stopPropagation()}>

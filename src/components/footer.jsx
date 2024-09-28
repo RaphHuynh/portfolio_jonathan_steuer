@@ -29,7 +29,7 @@ function Footer({ isInformationsPage, isImagesPage, headerZIndex }) {
   const textColorClass = isInformationsPage || isImagesPage ? "text-black" : "text-white";
   
   return (
-    <footer className={`fixed flex items-center space-x-4 left-4 md:left-auto md:right-4 bottom-5 ${textColorClass} `}
+    <footer className={`fixed flex items-center space-x-[16px] left-4 md:left-auto md:right-[48px] bottom-[40px] ${textColorClass} `}
       variants={fadeInOutVariants}
       style={{ zIndex: headerZIndex }}
       initial="hidden"
