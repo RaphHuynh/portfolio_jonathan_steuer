@@ -123,11 +123,11 @@ export default function Home() {
     >
       <header className="fixed w-full bg-transparent h-screen">
         <div className="flex w-full m-4">
-          <NavLink className='absolute flex flex-col title-medium md:top-[24px] md:left-[24px]' to="/">
+          <NavLink className='absolute flex flex-col title-medium left-[16px] top-[32px] md:top-[24px] md:left-[24px]' to="/">
             <h1 className="text-6xl md:text-8xl text-white">Jonathan</h1>
             <h1 className="text-6xl md:text-8xl text-white">Steuer</h1>
           </NavLink>
-          <nav className="flex flex-col md:flex-row bottom-20 space-y-3 md:space-y-0 left-4 md:space-x-[16px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed text-white title-medium text-[13px]">
+          <nav className="flex flex-col md:flex-row bottom-[83px] space-y-[32px] md:space-y-0 left-[16px] text-[13px] md: md:space-x-[16px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed text-white title-medium">
             <NavLink to="/images" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-white'}>
               Images
             </NavLink>
@@ -189,10 +189,10 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <footer className={`fixed flex space-x-[16px] items-center left-4 md:left-auto right-4 bottom-5 text-white text-[13px] title-medium md:bottom-[40px] md:right-[48px]`}
+      <footer className={`fixed flex space-x-[16px] items-center left-4 md:left-auto bottom-[24px] text-white text-[13px] title-medium md:bottom-[40px] md:right-[48px]`}
       >
-        <p>Creative filmmaker & Creative Director</p>
-        <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer">
+        <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
+        <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
           <FaInstagram />
         </a>
       </footer>
