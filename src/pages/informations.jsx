@@ -42,7 +42,7 @@ const fadeInOutVariants = {
                         </motion.div>
                     </motion.aside>
                     <motion.aside 
-                        className="flex flex-col px-[16px] md:text-[28px] line-[17.82px] md:line-[27.72px] bottom-20 md:bottom-[40px] md:left-[23px] fixed md:w-2/5" 
+                        className="flex flex-col px-[16px] md:px-0 md:text-[28px] line-[17.82px] md:line-[27.72px] bottom-20 md:bottom-[40px] md:left-[23px] fixed md:w-2/5" 
                         variants={fadeInOutVariants}
                     >
                         <p className="mb-4 md:mb-[28px] title-medium text-[18px] md:text-[28px]">
