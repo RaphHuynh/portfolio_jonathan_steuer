@@ -14,11 +14,11 @@ import { FaInstagram } from "react-icons/fa";
 
 export default function Home() {
   const films = [
-    { name: "Venice Beach - Fucking Young", time: "1:31", color: "#FFCE7F", video: venice, link: "https://vimeo.com/845017943" },
+    { name: "Venice Beach - Young", time: "1:31", color: "#FFCE7F", video: venice, link: "https://vimeo.com/845017943" },
     { name: "Till the end - Director Library", time: "13:34", color: "#86827B", video: till_the_end, link: "https://vimeo.com/967734838" },
     { name: "Les oiseaux - Pierre de maere", time: "3:15", color: "#93DBF3", video: les_oiseaux, link: "https://vimeo.com/778314485" },
     { name: "Manifeste du lin", time: "1:58", color: "#B493F3", video: manifeste_du_lin, link: "https://vimeo.com/718852941" },
-    { name: "Zambi- Trax Mag", time: "6:55", color: "#9D8A68", video: zambi, link: "https://vimeo.com/647091055" },
+    { name: "Zambi - Trax Mag", time: "6:55", color: "#9D8A68", video: zambi, link: "https://vimeo.com/647091055" },
     { name: "Wheels of freedom - Red Bull", time: "4:04", color: "#1E77EE", video: red_bull, link: "https://vimeo.com/647102047" },
     { name: "Courrèges - Subway", time: "0:52", color: "#6FB574", video: courreges, link: "https://vimeo.com/882834973/b5e58f3413" },
     { name: "Pulse - Trax Mag", time: "6:06", color: "#F76262", video: pulse, link: "https://vimeo.com/566808151" },
@@ -26,26 +26,31 @@ export default function Home() {
   ];
 
   const [backgroundColor, setBackgroundColor] = useState(films[0].color);
-  const [currentVideo, setCurrentVideo] = useState(null);
-  const [videoOpacity, setVideoOpacity] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [hoverVideo, setHoverVideo] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const scrollRef = useRef(null);
   const scrollIntervalRef = useRef(null);
+
+  const isMobile = () => {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  };
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    const updateBackgroundColor = () => {
+    const updateBackgroundAndVideo = () => {
       const containerRect = scrollContainer.getBoundingClientRect();
       const centerX = containerRect.left + containerRect.width / 2;
 
       const filmSpans = scrollContainer.querySelectorAll('.film-span');
-      for (const span of filmSpans) {
+      for (let i = 0; i < filmSpans.length; i++) {
+        const span = filmSpans[i];
         const spanRect = span.getBoundingClientRect();
         if (spanRect.left <= centerX && spanRect.right >= centerX) {
           setBackgroundColor(span.dataset.color);
+          setCurrentVideoIndex(i % films.length);
           break;
         }
       }
@@ -55,16 +60,16 @@ export default function Home() {
       if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
         scrollContainer.scrollLeft = 0;
       }
-      updateBackgroundColor();
+      updateBackgroundAndVideo();
     };
 
     scrollContainer.addEventListener('scroll', handleScroll);
 
-    updateBackgroundColor();
+    updateBackgroundAndVideo();
 
     const startScrolling = () => {
       scrollIntervalRef.current = setInterval(() => {
-        if (!isHovering && !isPlaying) {
+        if (!isPlaying) {
           scrollContainer.scrollLeft += 1;
         }
       }, 22);
@@ -73,7 +78,7 @@ export default function Home() {
     startScrolling();
 
     const handleWheel = (e) => {
-      if (!isHovering && !isPlaying) {
+      if (!isPlaying) {
         e.preventDefault();
         scrollContainer.scrollLeft += e.deltaY;
       }
@@ -88,40 +93,44 @@ export default function Home() {
       scrollContainer.removeEventListener('scroll', handleScroll);
       window.removeEventListener('wheel', handleWheel);
     };
-  }, [isHovering, isPlaying]);
+  }, [isPlaying, films.length]);
 
   const handleFilmHover = (video) => {
-    setIsHovering(true);
-    setCurrentVideo(video);
-    setTimeout(() => setVideoOpacity(1), 50);
+    if (!isMobile()) {
+      setHoverVideo(video);
+      clearInterval(scrollIntervalRef.current); // Stop scrolling
+    }
   };
 
   const handleFilmLeave = () => {
-    setIsHovering(false);
-    if (!isPlaying) {
-      setVideoOpacity(0);
-      setTimeout(() => setCurrentVideo(null), 300);
+    if (!isMobile()) {
+      setHoverVideo(null);
+      startScrolling(); // Resume scrolling
     }
   };
 
   const handleFilmClick = (film) => {
-    setCurrentVideo(film.link || film.video);
     setIsPlaying(true);
-    setVideoOpacity(1);
   };
 
   const handleCloseVideo = () => {
     setIsPlaying(false);
-    setVideoOpacity(0);
-    setTimeout(() => setCurrentVideo(null), 300);
+  };
+
+  const startScrolling = () => {
+    scrollIntervalRef.current = setInterval(() => {
+      if (!isPlaying) {
+        scrollRef.current.scrollLeft += 1;
+      }
+    }, 22);
   };
 
   return (
     <section
       className="fixed w-full h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor, transition: 'background-color 2.5s ease' }}
+      style={{ backgroundColor: isMobile() ? 'black' : backgroundColor, transition: 'background-color 2.5s ease' }}
     >
-      <header className="fixed w-full bg-transparent h-screen">
+      <header className="fixed w-full bg-transparent h-screen z-10">
         <div className="flex w-full m-4">
           <NavLink className='absolute flex flex-col title-medium left-[16px] top-[32px] md:top-[24px] md:left-[24px]' to="/">
             <h1 className="text-6xl md:text-8xl text-white">Jonathan</h1>
@@ -137,10 +146,10 @@ export default function Home() {
           </nav>
         </div>
       </header>
-      {isPlaying && currentVideo && (
+      {isPlaying ? (
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black z-50">
           <ReactPlayer
-            url={currentVideo}
+            url={films[currentVideoIndex].link || films[currentVideoIndex].video}
             playing
             controls
             width="100%"
@@ -153,43 +162,66 @@ export default function Home() {
             close
           </button>
         </div>
+      ) : (
+        <>
+          {isMobile() ? (
+            <div className="absolute top-0 left-0 w-full h-full">
+              {films.map((film, index) => (
+                <video
+                  key={index}
+                  className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500"
+                  src={film.video}
+                  loop
+                  muted
+                  autoPlay
+                  playsInline
+                  preload='auto'
+                  style={{
+                    opacity: index === currentVideoIndex ? 1 : 0,
+                    zIndex: index === currentVideoIndex ? 1 : 0,
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+              hoverVideo && (
+                <video
+                  className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500"
+                  src={hoverVideo}
+                  loop
+                  muted
+                  autoPlay
+                  playsInline
+                  preload='auto'
+                  style={{
+                    opacity: 1,
+                  }}
+                />
+              )
+          )}
+          <div
+            ref={scrollRef}
+            className="w-full overflow-x-scroll whitespace-nowrap z-10"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <div className="inline-block">
+              {[...films, ...films].map((film, index) => (
+                <span
+                  key={index}
+                  className="film-span inline-block px-[65px] text-white/50 text-xl capitalize hover:text-white hover:cursor-pointer delay-150 transition title-film"
+                  data-color={film.color}
+                  onMouseEnter={() => handleFilmHover(film.video)}
+                  onMouseLeave={handleFilmLeave}
+                  onClick={() => handleFilmClick(film)}
+                >
+                  <p>{film.name}</p> {film.time}
+                </span>
+              ))}
+            </div>
+          </div>
+        </>
       )}
-      {!isPlaying && currentVideo && (
-        <video
-          className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-          src={currentVideo}
-          loop
-          muted
-          autoPlay
-          playsInline
-          preload='auto'
-          style={{
-            opacity: videoOpacity,
-            transition: 'opacity 0.5s ease-in-out'
-          }}
-        />
-      )}
-      <div
-        ref={scrollRef}
-        className="w-full overflow-x-scroll whitespace-nowrap z-10"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        <div className="inline-block">
-          {[...films, ...films].map((film, index) => (
-            <span
-              key={index}
-              className="film-span inline-block px-[65px] text-white/50 text-xl capitalize hover:text-white hover:cursor-pointer delay-150 transition title-film"
-              data-color={film.color}
-              onMouseEnter={() => handleFilmHover(film.video)}
-              onMouseLeave={handleFilmLeave}
-              onClick={() => handleFilmClick(film)}
-            >
-              <p>{film.name}</p> {film.time}
-            </span>
-          ))}
-        </div>
-      </div>
-      <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-white text-[13px] title-medium md:bottom-[40px] md:right-[48px]`}
+      <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-white text-[13px] title-medium md:bottom-[40px] md:right-[48px] z-10`}
       >
         <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
         <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
