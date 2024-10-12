@@ -97,7 +97,7 @@ function Images() {
 
     return (
         <>
-            <header className="fixed w-full bg-transparent md:z-10">
+            <header className="fixed w-full bg-transparent z-10">
                 <div className="flex w-full m-4">
                     <NavLink className='absolute flex flex-col title-medium left-[16px] top-[32px] md:top-[24px] md:left-[24px]' to="/">
                         <h1 className="text-6xl md:text-8xl text-black">Jonathan</h1>
@@ -114,7 +114,7 @@ function Images() {
                 </div>
             </header>
             <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center">
-                <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4 z-10">
+                <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4 ">
                     <AnimatePresence>
                         {visibleImages.map((img, index) => (
                             <motion.div
@@ -135,8 +135,15 @@ function Images() {
                         ))}
                     </AnimatePresence>
                 </div>
-
-                {isModalOpen && (
+                <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-black text-[13px] title-medium md:bottom-[40px] md:right-[48px] z-10`}
+                >
+                    <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
+                    <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
+                        <FaInstagram />
+                    </a>
+                </footer>
+            </section>
+            {isModalOpen && (
                     <div
                         className={`fixed inset-0 h-screen bg-white bg-opacity-95 flex items-center justify-center z-20 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                         onClick={closeModal}
@@ -151,14 +158,6 @@ function Images() {
                         </div>
                     </div>
                 )}
-                <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-black text-[13px] title-medium md:bottom-[40px] md:right-[48px] z-10`}
-                >
-                    <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
-                    <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
-                        <FaInstagram />
-                    </a>
-                </footer>
-            </section>
         </>
 
     );

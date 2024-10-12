@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import photo from '../assets/carmen.png';
+import { FaInstagram } from "react-icons/fa";
 
 export default Informations;
 
@@ -63,6 +64,13 @@ const fadeInOutVariants = {
                 <Link to="/" className="text-black fixed top-[32px] right-[16px] md:top-[40px] md:right-[48px] hover:text-black/60 font-semibold text-[13px]">
                     Close
                 </Link>
+                <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-black text-[13px] title-medium md:bottom-[40px] md:right-[48px] z-10`}
+                >
+                    <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
+                    <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
+                        <FaInstagram />
+                    </a>
+                </footer>
             </motion.section>
         </AnimatePresence>
     );
