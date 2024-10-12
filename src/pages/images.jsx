@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import { NavLink } from 'react-router-dom';
+import { FaInstagram } from "react-icons/fa";
 import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import img4 from "../assets/img4.jpg";
@@ -51,14 +53,14 @@ function Images() {
             } else {
                 clearInterval(interval);
             }
-        }, 250); 
+        }, 250);
 
         return () => clearInterval(interval);
     }, [visibleImages, images, imagesLoaded]);
 
     const openModal = (index) => {
         setSelectedImage(images[index]);
-        setCurrentIndex(index); 
+        setCurrentIndex(index);
         setIsModalOpen(true);
     };
 
@@ -71,7 +73,7 @@ function Images() {
     };
 
     const nextImage = () => {
-        const nextIndex = (currentIndex + 1) % images.length; 
+        const nextIndex = (currentIndex + 1) % images.length;
         setSelectedImage(images[nextIndex]);
         setCurrentIndex(nextIndex);
     };
@@ -94,8 +96,24 @@ function Images() {
     }
 
     return (
-        <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center">
-            <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4">
+        <section className="fixed md:relative flex md:block w-full px-0 md:px-40 py-10 h-screen items-center justify-start md:justify-center -z-10">
+            <header className="fixed w-full bg-transparent h-screen">
+                <div className="flex w-full m-4">
+                    <NavLink className='absolute flex flex-col title-medium left-[16px] top-[32px] md:top-[24px] md:left-[24px]' to="/">
+                        <h1 className="text-6xl md:text-8xl text-black">Jonathan</h1>
+                        <h1 className="text-6xl md:text-8xl text-black">Steuer</h1>
+                    </NavLink>
+                    <nav className="flex flex-col md:flex-row bottom-[83px] space-y-[32px] md:space-y-0 left-[16px] text-[13px] md: md:space-x-[32px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed text-black title-medium">
+                        <NavLink to="/home" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-black'}>
+                            Films
+                        </NavLink>
+                        <NavLink to="/informations" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-black'}>
+                            Informations
+                        </NavLink>
+                    </nav>
+                </div>
+            </header>
+            <div className="flex flex-row md:grid md:grid-cols-4 gap-4 md:pt-48 md:pb-10 md:justify-center mx-auto overflow-x-auto items-center px-4 z-10">
                 <AnimatePresence>
                     {visibleImages.map((img, index) => (
                         <motion.div
@@ -104,13 +122,13 @@ function Images() {
                             animate="visible"
                             exit="hidden"
                             variants={fadeInVariants}
-                            className="flex-shrink-0 w-64 md:w-auto mx-auto mb-4"
+                            className="flex-shrink-0 md:w-auto mx-auto mb-4"
                             onClick={() => openModal(index)}
                         >
                             <img
                                 src={img}
                                 alt={`Image ${index + 1}`}
-                                className="w-full h-auto object-cover max-h-[50vh]"
+                                className="w-auto h-52 mr-10"
                             />
                         </motion.div>
                     ))}
@@ -118,8 +136,8 @@ function Images() {
             </div>
 
             {isModalOpen && (
-                <div 
-                    className={`fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                <div
+                    className={`fixed inset-0 h-screen bg-white bg-opacity-90 flex items-center justify-center z-20 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                     onClick={closeModal}
                 >
                     <div className="relative" onClick={(e) => e.stopPropagation()}>
@@ -127,11 +145,18 @@ function Images() {
                             src={selectedImage}
                             alt="Selected"
                             className="h-96 md:h-[700px] object-cover transition-opacity duration-300"
-                            onClick={nextImage} 
+                            onClick={nextImage}
                         />
                     </div>
                 </div>
             )}
+            <footer className={`fixed flex space-x-[32px] items-center left-4 md:left-auto bottom-[24px] text-black text-[13px] title-medium md:bottom-[40px] md:right-[48px] -z-10`}
+            >
+                <p className="fixed left-[16px] md:relative md:left-auto">Creative filmmaker & Creative Director</p>
+                <a href="https://www.instagram.com/jonathan.steuer/" target="_blank" rel="noreferrer" className="fixed right-[16px] md:relative md:right-auto">
+                    <FaInstagram />
+                </a>
+            </footer>
         </section>
     );
 }

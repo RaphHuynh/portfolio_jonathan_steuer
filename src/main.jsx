@@ -184,43 +184,6 @@ function Root() {
 
   return (
     <>
-      <AnimatePresence>
-        {!isInformationsPage && (
-          <motion.header 
-            className="fixed w-full bg-transparent" 
-            style={{ zIndex: headerZIndex }} 
-            variants={fadeInOutVariants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-          >
-            <div className="flex w-full">
-              <NavLink className='absolute flex flex-col title-medium left-[16px] top-[32px] md:top-[24px] md:left-[24px]' to="/">
-                <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Jonathan</h1>
-                <h1 className={`text-6xl md:text-8xl ${textColorClass}`}>Steuer</h1>
-              </NavLink>
-              <nav className={`flex flex-col md:flex-row bottom-[83px] space-y-[32px] md:space-y-0 left-[16px] text-[13px] md: md:space-x-[16px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed ${textColorClass} title-medium`}>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? `${textColorClass}/60` : textColorClass
-                  }
-                >
-                  Home
-                </NavLink>
-                <NavLink
-                  to="/informations"
-                  className={({ isActive }) =>
-                    isActive ? `${textColorClass}/60` : textColorClass
-                  }
-                >
-                  Informations
-                </NavLink>
-              </nav>
-            </div>
-          </motion.header>
-        )}
-      </AnimatePresence>
       <main>
         <div>
           {!isMobile && (
@@ -250,7 +213,6 @@ function Root() {
           <Outlet />
         </div>
       </main>
-      <Footer isInformationsPage={isInformationsPage} isImagesPage={isImagesPage} headerZIndex={headerZIndex} />
     </>
   );
 }

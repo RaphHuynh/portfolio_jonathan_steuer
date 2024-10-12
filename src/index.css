@@ -50,3 +50,8 @@
   .title-black {
     font-family: "suisseBlack";
   }
+
+  .title-film{
+    font-family: "suisseMedium";
+    font-size: 17px;
+  }
