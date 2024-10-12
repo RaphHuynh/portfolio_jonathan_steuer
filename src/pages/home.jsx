@@ -67,7 +67,7 @@ export default function Home() {
         if (!isHovering && !isPlaying) {
           scrollContainer.scrollLeft += 1;
         }
-      }, 25);
+      }, 22);
     };
 
     startScrolling();

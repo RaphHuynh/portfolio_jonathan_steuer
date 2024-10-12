@@ -104,7 +104,7 @@ function Images() {
                         <h1 className="text-6xl md:text-8xl text-black">Steuer</h1>
                     </NavLink>
                     <nav className="flex flex-col md:flex-row bottom-[83px] space-y-[32px] md:space-y-0 left-[16px] text-[13px] md: md:space-x-[32px] md:right-[48px] md:top-[40px] md:bottom-auto md:left-auto fixed text-black title-medium">
-                        <NavLink to="/home" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-black'}>
+                        <NavLink to="/" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-black'}>
                             Films
                         </NavLink>
                         <NavLink to="/informations" className={({ isActive }) => isActive ? 'text-gray-300' : 'text-black'}>
@@ -138,7 +138,7 @@ function Images() {
 
                 {isModalOpen && (
                     <div
-                        className={`fixed inset-0 h-screen bg-white bg-opacity-90 flex items-center justify-center z-20 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                        className={`fixed inset-0 h-screen bg-white bg-opacity-95 flex items-center justify-center z-20 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                         onClick={closeModal}
                     >
                         <div className="relative" onClick={(e) => e.stopPropagation()}>
