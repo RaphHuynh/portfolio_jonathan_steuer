@@ -163,13 +163,13 @@ function Root() {
     };
 
     // Charger les ressources
-    //loadResources();
+    loadResources();
 
     // Timeout de 5 secondes
     const timeoutId = setTimeout(() => {
       setHasTimedOut(true);
       setIsLoading(false);
-    }, 100000); // Timeout après 5 secondes
+    }, 5000); // Timeout après 5 secondes
 
     return () => {
       window.removeEventListener('resize', handleResize);
