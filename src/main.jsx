@@ -12,7 +12,6 @@ import {
 import * as ReactDOM from "react-dom/client";
 import Home from './pages/home.jsx';
 import Informations from './pages/informations.jsx';
-import Footer from './components/footer.jsx';
 import Images from './pages/images.jsx';
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedCursor from "react-animated-cursor"
@@ -164,13 +163,13 @@ function Root() {
     };
 
     // Charger les ressources
-    loadResources();
+    //loadResources();
 
     // Timeout de 5 secondes
     const timeoutId = setTimeout(() => {
       setHasTimedOut(true);
       setIsLoading(false);
-    }, 5000); // Timeout après 5 secondes
+    }, 100000); // Timeout après 5 secondes
 
     return () => {
       window.removeEventListener('resize', handleResize);
